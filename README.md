@@ -24,13 +24,6 @@ Easily embed a minimal looking xkcd comic any where you want.
 ### Embed live view:
 
 <iframe width="640px" height="600px" style="border:none;">
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="xkcd-embed.js"></script>
-  </head>
-  <body>
-      <div id="xkcd-embed"></div>
-  </body>
-</html>
+<script src="./xkcd-embed.js"></script>
+<div id="xkcd-embed"></div>
 </iframe>
