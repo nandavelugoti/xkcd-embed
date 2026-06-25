@@ -14,16 +14,17 @@
  *  ----------------------
 */
 
-const BASE_URL = 'https://xkcd.com'
-const LATEST_URL = `${BASE_URL}/info.0.json`
-const urlFromID = id => `${BASE_URL}/${id}/info.0.json`
+const BASE_URL = 
+  'https://raw.githubusercontent.com/aghontpi/mirror-xkcd-api/main/'
+const LATEST_URL = `${BASE_URL}/syncState.json`
+const urlFromId = id => `${BASE_URL}/api/${id}/info.0.json`
 
-const proxify = url => url
-const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const randomNum = 
+  (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 async function getComic(id) {
   let comic = null
-  await fetch(proxify(urlFromID(id)))
+  await fetch(urlFromId(id))
     .then(response => response.json())
     .then(data => comic = data)  
     .catch(ex => console.log(`[xkcd-embed] getComic(${id}): ${ex}`))
@@ -32,7 +33,12 @@ async function getComic(id) {
 
 async function getComicLatest() {
   let comic = null
-  await fetch(proxify(LATEST_URL))
+  let comicId = -1
+  await fetch(LATEST_URL)
+    .then(response => response.json())
+    .then(data => comicId = data.last_update_content.id)
+    .catch(ex => console.log(`[xkcd-embed] getComicLatest(): ${ex}`))
+  await fetch(urlFromId(comicId))
     .then(response => response.json())
     .then(data => comic = data)  
     .catch(ex => console.log(`[xkcd-embed] getComicLatest(): ${ex}`))
@@ -118,11 +124,16 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     nextBtn.style.visibility = isLatestComic ? 'hidden' : 'visible'
   }
 
-  prevBtn.onclick = async () => updateUI(await getComic(parseInt(currText.innerHTML)-2))
-  nextBtn.onclick = async () => updateUI(await getComic(parseInt(currText.innerHTML)+2))
-  predBtn.onclick = async () => updateUI(await getComic(parseInt(predBtn.value)))
-  succBtn.onclick = async () => updateUI(await getComic(parseInt(succBtn.value)))
-  randBtn.onclick = async () => updateUI(await getComic(randomNum(0, parseInt(latestComic.num))))
+  prevBtn.onclick = async () => 
+    updateUI(await getComic(parseInt(currText.innerHTML)-2))
+  nextBtn.onclick = async () => 
+    updateUI(await getComic(parseInt(currText.innerHTML)+2))
+  predBtn.onclick = async () => 
+    updateUI(await getComic(parseInt(predBtn.value)))
+  succBtn.onclick = async () => 
+    updateUI(await getComic(parseInt(succBtn.value)))
+  randBtn.onclick = async () => 
+    updateUI(await getComic(randomNum(1, parseInt(latestComic.num))))
   lateBtn.onclick = () => updateUI(latestComic)
   updateUI(latestComic)
 });
