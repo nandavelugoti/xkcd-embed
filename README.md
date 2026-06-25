@@ -2,7 +2,7 @@
 
 Easily embed a minimal looking xkcd comic any where you want.
 
-> Privacy first: No explicit tracking, telemetery. Only memes.
+> Privacy first: No explicit tracking or telemetery. Only memes.
 
 # Embed Instructions
 
@@ -20,4 +20,5 @@ Step 2: Use it anywhere you want in the html by:
 
 # Live Demo 
 
-Wanna see it in action? head to [https://nanda.one/xkcd-embed/](https://nanda.one/xkcd-embed/) 
+If want to try and test a demo: [https://nanda.one/xkcd-embed/](https://nanda.one/xkcd-embed/) 
+Wanna see it in action? Head to my website to see how i used it: [https://nanda.one/](https://nanda.one/)
