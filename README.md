@@ -2,7 +2,7 @@
 
 Easily embed a minimal looking xkcd comic any where you want.
 
-> Privacy first: No tracking, no telemetery, pure memes.
+> Privacy first: No explicit tracking, telemetery. Only memes.
 
 # Embed Instructions
 
