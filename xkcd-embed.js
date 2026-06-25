@@ -35,7 +35,7 @@ async function getComicLatest() {
   await fetch(proxify(LATEST_URL))
     .then(response => response.json())
     .then(data => comic = data)  
-    .catch(ex => console.log(`[xkcd-embed] getComic(${id}): ${ex}`))
+    .catch(ex => console.log(`[xkcd-embed] getComicLatest(): ${ex}`))
   return comic
 }
 
