@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     nextBtn.style.visibility = isLatestComic ? 'hidden' : 'visible'
   }
 
+  lateBtn.onclick = () => updateUI(latestComic)
   prevBtn.onclick = async () => 
     updateUI(await getComic(parseInt(currText.innerHTML)-2))
   nextBtn.onclick = async () => 
@@ -137,9 +138,11 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     updateUI(await getComic(parseInt(succBtn.value)))
   randBtn.onclick = async () => 
     updateUI(await getComic(randomNum(1, parseInt(latestComic.num))))
-  lateBtn.onclick = () => updateUI(latestComic)
-
-  gitBtn.onclick = () => window.open('https://github.com/nandavelugoti/xkcd-embed', '_blank', 'noopener,noreferrer')
-  
+  gitBtn.onclick = () => 
+    window.open(
+      'https://github.com/nandavelugoti/xkcd-embed',
+      '_blank', 
+      'noopener,noreferrer'
+    )
   updateUI(latestComic)
 });
