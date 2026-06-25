@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
       </div>
       <img class="comic" id="comic" alt="xkcd comic not found!" />
       <div class="bottomNav">
-        <input class="linkBtn" type="button" id="github" value="github" />
+        <input class="linkBtn" type="button" id="github" value="github &#129133;" />
         <input class="linkBtn" type="button" id="random" value="random" />
         <input class="linkBtn" type="button" id="latest" value="latest" />
       </div>
@@ -138,5 +138,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   randBtn.onclick = async () => 
     updateUI(await getComic(randomNum(1, parseInt(latestComic.num))))
   lateBtn.onclick = () => updateUI(latestComic)
+
+  gitBn.onclick = () => window.open('https://github.com/nandavelugoti/xkcd-embed', '_blank', 'noopener,noreferrer')
+  
   updateUI(latestComic)
 });
