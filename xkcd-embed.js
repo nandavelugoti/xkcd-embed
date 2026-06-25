@@ -18,7 +18,7 @@ const BASE_URL = 'https://xkcd.com'
 const LATEST_URL = `${BASE_URL}/info.0.json`
 const urlFromID = id => `${BASE_URL}/${id}/info.0.json`
 
-const proxify = url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`
+const proxify = url => `${encodeURIComponent(url)}`
 const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 async function getComic(id) {
