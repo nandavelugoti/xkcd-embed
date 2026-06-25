@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     updateUI(await getComic(randomNum(1, parseInt(latestComic.num))))
   lateBtn.onclick = () => updateUI(latestComic)
 
-  gitBn.onclick = () => window.open('https://github.com/nandavelugoti/xkcd-embed', '_blank', 'noopener,noreferrer')
+  gitBtn.onclick = () => window.open('https://github.com/nandavelugoti/xkcd-embed', '_blank', 'noopener,noreferrer')
   
   updateUI(latestComic)
 });
