@@ -60,9 +60,11 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         justify-content: space-between;
       }
       .comic {
+        display: flex;
         align-self: center;
         object-fit: scale-down;
         width: 100%;
+        height: auto;
       }
       .bottomNav {
         display:flex;
