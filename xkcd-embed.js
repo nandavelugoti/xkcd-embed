@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         justify-content: space-between;
       }
       .comic {
-        display: flex;
         align-self: center;
         object-fit: scale-down;
         width: 100%;
@@ -105,6 +104,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   const embedDiv = document.getElementById("xkcd-embed")
   embedDiv.innerHTML = htmlToEmbed
   embedDiv.style.height = "100%"
+  embedDiv.style.display = "flex" 
 
   const currText = document.getElementById("current")
   const prevBtn  = document.getElementById("prev")
