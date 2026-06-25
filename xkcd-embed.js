@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
       .comic {
         align-self: center;
         object-fit: scale-down;
+        width: 100%;
       }
       .bottomNav {
         display:flex;
