@@ -20,5 +20,6 @@ Step 2: Use it anywhere you want in the html by:
 
 # Live Demo 
 
-If want to try and test a demo: [https://nanda.one/xkcd-embed/](https://nanda.one/xkcd-embed/) 
+If want to try and test a demo: [https://nanda.one/xkcd-embed/](https://nanda.one/xkcd-embed/).
+
 Wanna see it in action? Head to my website to see how i used it: [https://nanda.one/](https://nanda.one/)
