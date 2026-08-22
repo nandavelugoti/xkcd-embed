@@ -2,6 +2,8 @@
  *  ----------------------
  * |   < 123  124  125 >  |
  * |----------------------|
+ * |         TITLE        |
+ * |----------------------|
  * |                      |
  * |                      |
  * |                      |
@@ -20,7 +22,23 @@ const LATEST_URL = `${BASE_URL}/syncState.json`
 const urlFromId = id => `${BASE_URL}/api/${id}/info.0.json`
 
 const randomNum = 
-  (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+
+const month = {
+  '1'  : 'JANUARY',
+  '2'  : 'FEBRUARY',
+  '3'  : 'MARCH',
+  '4'  : 'APRIL',
+  '5'  : 'MAY',
+  '6'  : 'JUNE',
+  '7'  : 'JULY',
+  '8'  : 'AUGUST',
+  '9'  : 'SEPTEMBER',
+  '10' : 'OCTOBER',
+  '11' : 'NOVEMBER',
+  '12' : 'DECEMBER'
+}
+const comicDate = (comic) => `${month[comic.month]} ${comic.day}, ${comic.year}`
 
 async function getComic(id) {
   let comic = null
@@ -48,25 +66,43 @@ async function getComicLatest() {
 document.addEventListener("DOMContentLoaded", async (event) => {
   const htmlToEmbed = `
     <!-- Embedded HTML below. For more see: -->
+
     <style>
+      @font-face {
+        font-family: 'xkcd';
+        src: url('https://cdn.jsdelivr.net/gh/ipython/xkcd-font@master/xkcd/build/xkcd.otf') format('opentype'),
+        url('https://cdn.jsdelivr.net/gh/ipython/xkcd-font@master/xkcd/build/xkcd.woff')
+        format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
       .mainContainer {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
+        font-family: 'xkcd', cursive, sans-serif;
       }
       .topNav {
-        display:flex;
+        display: flex;
         justify-content: space-between;
       }
       .comic {
+        display:flex;
+        flex-direction: column;
+      }
+      .comicInfo {
+        display: flex;
+        justify-content: space-between;
+      }
+      .comicImg {
         align-self: center;
         object-fit: scale-down;
         width: 100%;
         height: auto;
       }
       .bottomNav {
-        display:flex;
+        display: flex;
         justify-content: space-between;
       }
       .linkBtn {
@@ -85,17 +121,24 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     <div class="mainContainer">
       <div class="topNav">
-        <input class="linkBtn" type="button" id="prev"        value="<" />
+        <input class="linkBtn" type="button" id="prev"        value="<<" />
         <input class="linkBtn" type="button" id="predecessor" value=""  />
         <b><p id="current"></p></b>
         <input class="linkBtn" type="button" id="successor"   value=""  />
-        <input class="linkBtn" type="button" id="next"        value=">" />
+        <input class="linkBtn" type="button" id="next"        value=">>" />
       </div>
-      <img class="comic" id="comic" alt="xkcd comic not found!" />
+      <div class="comic">
+        <div class="comicInfo">
+          <p id="title"></p>
+          <p id="date"></p>
+        </div>
+        <img class="comicImg" id="comic" alt="xkcd comic not found!" />
+      </div>
+
       <div class="bottomNav">
-        <input class="linkBtn" type="button" id="github" value="github &#129133;" />
-        <input class="linkBtn" type="button" id="random" value="random" />
-        <input class="linkBtn" type="button" id="latest" value="latest" />
+        <input class="linkBtn" type="button" id="github" value="GITHUB &#129133;" />
+        <input class="linkBtn" type="button" id="random" value="RANDOM" />
+        <input class="linkBtn" type="button" id="latest" value="LATEST" />
       </div>
     </div>
     <!-- Embedded HTML above. For more see: -->
@@ -106,15 +149,17 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   embedDiv.style.height = "100%"
   embedDiv.style.display = "flex" 
 
-  const currText = document.getElementById("current")
-  const prevBtn  = document.getElementById("prev")
-  const nextBtn  = document.getElementById("next")
-  const predBtn  = document.getElementById("predecessor")
-  const succBtn  = document.getElementById("successor")
-  const gitBtn   = document.getElementById("github")
-  const randBtn  = document.getElementById("random")
-  const lateBtn  = document.getElementById("latest")
-  const comicImg = document.getElementById("comic")
+  const currText  = document.getElementById("current")
+  const prevBtn   = document.getElementById("prev")
+  const nextBtn   = document.getElementById("next")
+  const predBtn   = document.getElementById("predecessor")
+  const succBtn   = document.getElementById("successor")
+  const gitBtn    = document.getElementById("github")
+  const randBtn   = document.getElementById("random")
+  const lateBtn   = document.getElementById("latest")
+  const comicImg  = document.getElementById("comic")
+  const dateText  = document.getElementById("date")
+  const titleText = document.getElementById("title")
 
   let latestComic = await getComicLatest()
 
@@ -122,6 +167,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     let isLatestComic = (latestComic.num == currComic.num) 
     comicImg.src = currComic.img
     currText.innerHTML = currComic.num
+    dateText.innerHTML = comicDate(currComic)
+    titleText.innerHTML = currComic.safe_title.toUpperCase()
     predBtn.value = `${parseInt(currComic.num)-1}`
     succBtn.value = isLatestComic ? '' : `${parseInt(currComic.num)+1}`
     nextBtn.style.visibility = isLatestComic ? 'hidden' : 'visible'
