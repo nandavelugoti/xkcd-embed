@@ -65,7 +65,7 @@ async function getComicLatest() {
 
 document.addEventListener("DOMContentLoaded", async (event) => {
   const htmlToEmbed = `
-    <!-- Embedded HTML below. For more see: -->
+    <!-- Embedded HTML below. For more see: https://github.com/nandavelugoti/xkcd-embed -->
 
     <style>
       @font-face {
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         <input class="linkBtn" type="button" id="latest" value="LATEST" />
       </div>
     </div>
-    <!-- Embedded HTML above. For more see: -->
+    <!-- Embedded HTML above. For more see: https://github.com/nandavelugoti/xkcd-embed -->
   `
 
   const embedDiv = document.getElementById("xkcd-embed")
